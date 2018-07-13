@@ -15,7 +15,7 @@
  */
 
 provider google {
-  version = "~> 0.1"
+  version = "~> 1.16.0"
 
   credentials = "${file("${var.gcp_credentials_file_path}")}"
 
@@ -36,8 +36,7 @@ data "template_file" "group1-startup-script" {
 
 module "mig1" {
   source            = "GoogleCloudPlatform/managed-instance-group/google"
-  version           = "1.1.0"
-  # 1.1.0 works but has many warnings.
+  version           = "1.1.8"
   region            = "${var.gcp_region}"
   zone              = "${var.gcp_zone}"
   name              = "group1"
