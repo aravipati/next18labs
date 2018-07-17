@@ -32,7 +32,7 @@ data "template_file" "group-startup-script" {
 
 module "mig1" {
   source            = "GoogleCloudPlatform/managed-instance-group/google"
-  version           = "1.1.0"
+  version           = "1.1.10"
   region            = "${var.gcp_region}"
   zone              = "${var.gcp_zone}"
   network           = "${var.gcp_network}"
@@ -46,7 +46,7 @@ module "mig1" {
 
 module "mig2" {
   source            = "GoogleCloudPlatform/managed-instance-group/google"
-  version           = "1.1.0"
+  version           = "1.1.10"
   region            = "${var.gcp_region2}"
   zone              = "${var.gcp_zone2}"
   network           = "${var.gcp_network}"
