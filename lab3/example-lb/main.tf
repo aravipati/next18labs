@@ -36,7 +36,7 @@ data "template_file" "group1-startup-script" {
 
 module "mig1" {
   source            = "GoogleCloudPlatform/managed-instance-group/google"
-  version           = "1.1.8"
+  version           = "1.1.10"
   region            = "${var.gcp_region}"
   zone              = "${var.gcp_zone}"
   name              = "group1"

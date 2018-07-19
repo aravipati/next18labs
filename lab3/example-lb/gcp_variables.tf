@@ -14,27 +14,26 @@
  * limitations under the License.
  */
 
-
 /*
  * Terraform variable declarations for GCP.
  */
 
 variable gcp_credentials_file_path {
   description = "Locate the GCP credentials .json file."
-  type = "string"
+  type        = "string"
 }
 
 variable gcp_project_id {
   description = "GCP Project ID."
-  type = "string"
+  type        = "string"
 }
 
 variable gcp_region {
   description = "Default to Council Bluffs region."
-  default = "us-central1"
+  default     = "us-central1"
 }
 
 variable gcp_zone {
   description = "Default to Council Bluffs zone b for no real reason."
-  default = "us-central1-b"
+  default     = "us-central1-b"
 }
