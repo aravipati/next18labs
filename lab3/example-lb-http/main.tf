@@ -26,20 +26,20 @@ provider google {
   region = "${var.gcp_region}"
 }
 
-module "gce-lb-http" {
+module "gclb-gce-lb-http" {
   source      = "GoogleCloudPlatform/lb-http/google"
   version     = "1.0.4"
-  name        = "group-http-lb"
-  target_tags = ["${module.mig1.target_tags}", "${module.mig2.target_tags}"]
+  name        = "gclb-http-lb"
+  target_tags = ["${module.gclb-mig1.target_tags}", "${module.gclb-mig2.target_tags}"]
   network     = "${var.gcp_network}"
 
   backends = {
     "0" = [
       {
-        group = "${module.mig1.instance_group}"
+        group = "${module.gclb-mig1.instance_group}"
       },
       {
-        group = "${module.mig2.instance_group}"
+        group = "${module.gclb-mig2.instance_group}"
       },
     ]
   }

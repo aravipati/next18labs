@@ -18,7 +18,7 @@ data "template_file" "group1-startup-script" {
   template = "${file("${format("%s/nginx_upstream.sh.tpl", path.module)}")}"
 
   vars {
-    UPSTREAM = "${module.gce-ilb.ip_address}"
+    UPSTREAM = "${module.ilb-gce-ilb.ip_address}"
   }
 }
 
@@ -38,26 +38,26 @@ data "template_file" "group3-startup-script" {
   }
 }
 
-module "mig1" {
+module "ilb-mig1" {
   source            = "GoogleCloudPlatform/managed-instance-group/google"
   version           = "1.1.0"
   region            = "${var.gcp_region}"
   zone              = "${var.gcp_zone}"
-  name              = "group1"
+  name              = "ilb-group1"
   size              = 2
   target_tags       = ["allow-group1"]
-  target_pools      = ["${module.gce-lb-fr.target_pool}"]
+  target_pools      = ["${module.ilb-gce-lb-fr.target_pool}"]
   service_port      = 80
   service_port_name = "http"
   startup_script    = "${data.template_file.group1-startup-script.rendered}"
 }
 
-module "mig2" {
+module "ilb-mig2" {
   source            = "GoogleCloudPlatform/managed-instance-group/google"
   version           = "1.1.0"
   region            = "${var.gcp_region}"
   zone              = "${var.gcp_zone2}"
-  name              = "group2"
+  name              = "ilb-group2"
   size              = 2
   target_tags       = ["allow-group2"]
   service_port      = 80
@@ -65,12 +65,12 @@ module "mig2" {
   startup_script    = "${data.template_file.group2-startup-script.rendered}"
 }
 
-module "mig3" {
+module "ilb-mig3" {
   source            = "GoogleCloudPlatform/managed-instance-group/google"
   version           = "1.1.0"
   region            = "${var.gcp_region}"
   zone              = "${var.gcp_zone3}"
-  name              = "group3"
+  name              = "ilb-group3"
   size              = 2
   target_tags       = ["allow-group3"]
   service_port      = 80

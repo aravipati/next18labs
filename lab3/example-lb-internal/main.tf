@@ -26,32 +26,32 @@ provider google {
   region = "${var.gcp_region}"
 }
 
-module "gce-lb-fr" {
+module "ilb-gce-lb-fr" {
   source       = "GoogleCloudPlatform/lb/google"
   version      = "1.0.2"
   region       = "${var.gcp_region}"
   network      = "${var.gcp_network}"
-  name         = "group1-lb"
-  service_port = "${module.mig1.service_port}"
-  target_tags  = ["${module.mig1.target_tags}"]
+  name         = "ilb-group1-lb"
+  service_port = "${module.ilb-mig1.service_port}"
+  target_tags  = ["${module.ilb-mig1.target_tags}"]
 }
 
-module "gce-ilb" {
+module "ilb-gce-ilb" {
   source       = "GoogleCloudPlatform/lb-internal/google"
   version      = "1.0.4"
   region      = "${var.gcp_region}"
-  name        = "group-ilb"
-  ports       = ["${module.mig2.service_port}"]
-  health_port = "${module.mig2.service_port}"
-  source_tags = ["${module.mig1.target_tags}"]
-  target_tags = ["${module.mig2.target_tags}", "${module.mig3.target_tags}"]
+  name        = "ilb-group-ilb"
+  ports       = ["${module.ilb-mig2.service_port}"]
+  health_port = "${module.ilb-mig2.service_port}"
+  source_tags = ["${module.ilb-mig1.target_tags}"]
+  target_tags = ["${module.ilb-mig2.target_tags}", "${module.ilb-mig3.target_tags}"]
 
   backends = [
     {
-      group = "${module.mig2.instance_group}"
+      group = "${module.ilb-mig2.instance_group}"
     },
     {
-      group = "${module.mig3.instance_group}"
+      group = "${module.ilb-mig3.instance_group}"
     },
   ]
 }

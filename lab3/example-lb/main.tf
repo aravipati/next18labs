@@ -34,25 +34,25 @@ data "template_file" "group1-startup-script" {
   }
 }
 
-module "mig1" {
+module "nlb-mig1" {
   source            = "GoogleCloudPlatform/managed-instance-group/google"
   version           = "1.1.8"
   region            = "${var.gcp_region}"
   zone              = "${var.gcp_zone}"
-  name              = "group1"
+  name              = "nlb-group1"
   size              = 2
   service_port      = 80
   service_port_name = "http"
-  target_pools      = ["${module.gce-lb-fr.target_pool}"]
+  target_pools      = ["${module.nlb-gce-lb-fr.target_pool}"]
   target_tags       = ["allow-service1"]
   startup_script    = "${data.template_file.group1-startup-script.rendered}"
 }
 
-module "gce-lb-fr" {
+module "nlb-gce-lb-fr" {
   source       = "GoogleCloudPlatform/lb/google"
   version      = "1.0.2"
   region       = "${var.gcp_region}"
-  name         = "group1-lb"
-  service_port = "${module.mig1.service_port}"
-  target_tags  = ["${module.mig1.target_tags}"]
+  name         = "nlb-group1-lb"
+  service_port = "${module.nlb-mig1.service_port}"
+  target_tags  = ["${module.nlb-mig1.target_tags}"]
 }
