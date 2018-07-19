@@ -29,23 +29,23 @@ variable gcp_project_id {
 }
 
 variable gcp_region {
-  description = "Default to Council Bluffs region."
-  default     = "us-central1"
-}
-
-variable gcp_zone {
-  description = "Default to Council Bluffs region."
-  default     = "us-central1-b"
-}
-
-variable gcp_region2 {
   description = "Default to The Dalles, Oregon region."
   default     = "us-west1"
 }
 
-variable gcp_zone2 {
+variable gcp_zone {
   description = "Default to The Dalles, Oregon region."
   default     = "us-west1-b"
+}
+
+variable gcp_region2 {
+  description = "Default to Los Angeles region."
+  default     = "us-west2"
+}
+
+variable gcp_zone2 {
+  description = "Default to Los Angeles region."
+  default     = "us-west2-b"
 }
 
 variable gcp_network {
