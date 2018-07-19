@@ -37,8 +37,8 @@ module "ilb-gce-lb-fr" {
 }
 
 module "ilb-gce-ilb" {
-  source       = "GoogleCloudPlatform/lb-internal/google"
-  version      = "1.0.4"
+  source      = "GoogleCloudPlatform/lb-internal/google"
+  version     = "1.0.4"
   region      = "${var.gcp_region}"
   name        = "ilb-group-ilb"
   ports       = ["${module.ilb-mig2.service_port}"]
