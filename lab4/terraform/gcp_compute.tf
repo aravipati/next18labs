@@ -15,14 +15,27 @@
  */
 
 /*
- * Terraform outputs.
+ * Terraform compute resources for GCP.
  */
 
-output "LB_IP_v4" {
-  value = "${google_compute_global_forwarding_rule.default.ip_address}"
-  value = "${module.gclb-gce-lb-http.external_ip}"
-}
+resource "google_compute_instance" "siege-vm" {
+  name         = "siege-vm"
+  machine_type = "${var.gcp_siege_instance_type}"
+  zone         = "${var.gcp_siege_zone}"
 
-output "SIEGE_IP" {
-  value = "${google_compute_instance.siege-vm.network_interface.0.access_config.0.assigned_nat_ip}"
+  boot_disk {
+    initialize_params {
+      image = "${var.compute_image}"
+    }
+  }
+
+  network_interface {
+    subnetwork = "${var.gcp_network}"
+
+    access_config {
+      # Ephemeral IP
+    }
+  }
+
+  metadata_startup_script = "${file("siege_startup.sh.tpl")}"
 }

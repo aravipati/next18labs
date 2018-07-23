@@ -48,6 +48,10 @@ variable gcp_zone2 {
   default     = "europe-west1-b"
 }
 
+variable gcp_siege_instance_type {
+  default = "n1-standard-1"
+}
+
 variable gcp_siege_region {
   description = "Default to The Dalles, Oregon region."
   default     = "us-west1"

@@ -23,12 +23,12 @@ data "template_file" "group-startup-script" {
 }
 
 module "us-central1-mig" {
-  source            = "GoogleCloudPlatform/managed-instance-group/google"
-  version           = "1.1.10"
-  region            = "${var.gcp_region}"
-  zone              = "${var.gcp_zone}"
-  network           = "${var.gcp_network}"
-  name              = "us-central1-mig"
+  source             = "GoogleCloudPlatform/managed-instance-group/google"
+  version            = "1.1.10"
+  region             = "${var.gcp_region}"
+  zone               = "${var.gcp_zone}"
+  network            = "${var.gcp_network}"
+  name               = "us-central1-mig"
   wait_for_instances = true
   autoscaling        = true
 
@@ -48,12 +48,12 @@ module "us-central1-mig" {
 }
 
 module "europe-west1-mig" {
-  source            = "GoogleCloudPlatform/managed-instance-group/google"
-  version           = "1.1.10"
-  region            = "${var.gcp_region2}"
-  zone              = "${var.gcp_zone2}"
-  network           = "${var.gcp_network}"
-  name              = "europe-west1-mig"
+  source             = "GoogleCloudPlatform/managed-instance-group/google"
+  version            = "1.1.10"
+  region             = "${var.gcp_region2}"
+  zone               = "${var.gcp_zone2}"
+  network            = "${var.gcp_network}"
+  name               = "europe-west1-mig"
   wait_for_instances = true
   autoscaling        = true
 

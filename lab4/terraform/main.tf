@@ -29,7 +29,7 @@ provider google {
 module "gclb-gce-lb-http" {
   source      = "GoogleCloudPlatform/lb-http/google"
   version     = "1.0.4"
-  name        = "gclb-http-lb"
+  name        = "http-lb"
   target_tags = ["${var.target_tags}"]
   network     = "${var.gcp_network}"
 
