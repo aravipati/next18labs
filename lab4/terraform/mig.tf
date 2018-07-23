@@ -14,14 +14,6 @@
  * limitations under the License.
  */
 
-variable group1_size {
-  default = "2"
-}
-
-variable group2_size {
-  default = "2"
-}
-
 data "template_file" "group-startup-script" {
   template = "${file("${format("%s/startup.sh.tpl", path.module)}")}"
 
@@ -37,7 +29,17 @@ module "us-central1-mig" {
   zone              = "${var.gcp_zone}"
   network           = "${var.gcp_network}"
   name              = "us-central1-mig"
-  size              = "${var.group1_size}"
+  wait_for_instances = true
+  autoscaling        = true
+
+  autoscaling_cpu = [{
+    target = 0.8
+  }]
+
+  size              = 1
+  min_replicas      = 1
+  max_replicas      = 5
+  cooldown_period   = 45
   compute_image     = "${var.compute_image}"
   target_tags       = ["${var.target_tags}"]
   service_port      = 80
@@ -52,7 +54,17 @@ module "europe-west1-mig" {
   zone              = "${var.gcp_zone2}"
   network           = "${var.gcp_network}"
   name              = "europe-west1-mig"
-  size              = "${var.group2_size}"
+  wait_for_instances = true
+  autoscaling        = true
+
+  autoscaling_cpu = [{
+    target = 0.8
+  }]
+
+  size              = 1
+  min_replicas      = 1
+  max_replicas      = 5
+  cooldown_period   = 45
   compute_image     = "${var.compute_image}"
   target_tags       = ["${var.target_tags}"]
   service_port      = 80
