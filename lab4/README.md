@@ -22,7 +22,7 @@ Task 3: Configure the HTTP Load Balancer
 *  Copy the code
    * `git clone https://github.com/miketruty/next18labs.git`
    *   Change directory
-   *   `pushd next18labs/demo4`
+   *   `pushd next18labs/lab4`
 *  Setup Terraform binary
    *   `./get_terraform.sh`
    *   `[export command from get_terraform.sh output]`
@@ -50,3 +50,12 @@ Task 3: Configure the HTTP Load Balancer
 *  Note the IP addresses printed as output from the APPLY. They are needed
    to complete the remaining tasks in the lab.
 
+Starting at Task 4: Test the HTTP Load Balancer, continue following the
+instructions in Qwiklabs with the following notes:
+
+*  Task 4
+   *  At this time the automation does not create the LB_IP_v6.
+   *  `siege-vm` is already created. Skip creating it.
+   *  `siege` is already installed.
+
+*  The remaining tasks proceed as written.
