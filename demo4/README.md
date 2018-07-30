@@ -10,8 +10,8 @@ This demo creates:
 *   1 GKE cluster named `primary-gkecluster` with a node running in each of
     `us-west1-a`, `us-west1-b`, and `us-west1-c`.
 *   1 Global HTTP load balancer to handle the public IP.
-*   GKE also creates a regional TCP network load balancer in `trust-vpc` in
-    `us-west1`.
+*   GKE also creates 1 regional/internal TCP layer 4 load balancer in
+    `trust-vpc` in `us-west1`.
 
 ## How?
 
